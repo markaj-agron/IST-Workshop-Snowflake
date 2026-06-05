@@ -7,7 +7,7 @@ header: 'HEIG-VD IST 2025/26 — Snowflake | Group A'
 footer: 'Markaj Agron · Jorand Yuuta · Stampfli Nathan · Liao Pei-Wen · 12.06.2026'
 size: 16:9
 style: |
-  @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=Space+Mono:wght@400;700&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@400;600;700;900&family=Source+Code+Pro:wght@400;700&display=swap');
 
   :root {
     --bg:        #ffffff;
@@ -30,7 +30,7 @@ style: |
   section {
     background: var(--bg);
     color: var(--text);
-    font-family: 'Space Grotesk', sans-serif;
+    font-family: 'Source Serif 4', serif;
     font-size: 21px;
     padding: 48px 68px 60px;
     line-height: 1.55;
@@ -38,7 +38,7 @@ style: |
 
   /* ── HEADINGS ── */
   h1 {
-    font-family: 'Space Grotesk', sans-serif;
+    font-family: 'Source Serif 4', serif;
     font-size: 1.75em;
     font-weight: 900;
     color: var(--text);
@@ -51,7 +51,7 @@ style: |
   }
 
   h2 {
-    font-family: 'Space Grotesk', sans-serif;
+    font-family: 'Source Serif 4', serif;
     font-size: 0.95em;
     font-weight: 700;
     color: var(--blue);
@@ -62,7 +62,7 @@ style: |
   }
 
   h3 {
-    font-family: 'Space Mono', monospace;
+    font-family: 'Source Code Pro', monospace;
     font-size: 0.82em;
     font-weight: 700;
     color: var(--orange);
@@ -90,7 +90,7 @@ style: |
     padding: 0.6em 1em;
     margin: 0.9em 0 0;
     color: var(--blue-dark);
-    font-family: 'Space Mono', monospace;
+    font-family: 'Source Code Pro', monospace;
     font-size: 0.78em;
     line-height: 1.5;
   }
@@ -100,7 +100,7 @@ style: |
   code {
     background: var(--bg2);
     color: var(--teal);
-    font-family: 'Space Mono', monospace;
+    font-family: 'Source Code Pro', monospace;
     font-size: 0.8em;
     padding: 1px 6px;
     border-radius: 3px;
@@ -135,7 +135,7 @@ style: |
   th {
     background: var(--text);
     color: #ffffff;
-    font-family: 'Space Grotesk', sans-serif;
+    font-family: 'Source Serif 4', serif;
     font-weight: 700;
     font-size: 0.85em;
     padding: 0.55em 0.9em;
@@ -193,7 +193,7 @@ style: |
     display: inline-block;
     background: var(--bg3);
     border-radius: 3px;
-    font-family: 'Space Mono', monospace;
+    font-family: 'Source Code Pro', monospace;
     font-size: 0.68em;
     padding: 2px 8px;
     color: var(--muted);
@@ -205,7 +205,7 @@ style: |
 
   /* ── HEADER / FOOTER ── */
   header {
-    font-family: 'Space Mono', monospace;
+    font-family: 'Source Code Pro', monospace;
     font-size: 0.46em;
     color: var(--muted);
     border-bottom: 1px solid var(--border);
@@ -213,7 +213,7 @@ style: |
     letter-spacing: 0.03em;
   }
   footer {
-    font-family: 'Space Mono', monospace;
+    font-family: 'Source Code Pro', monospace;
     font-size: 0.46em;
     color: var(--muted);
     border-top: 1px solid var(--border);
@@ -223,7 +223,7 @@ style: |
 
   /* ── PAGE NUMBER ── */
   section::after {
-    font-family: 'Space Mono', monospace;
+    font-family: 'Source Code Pro', monospace;
     font-size: 0.46em;
     color: var(--border);
     content: attr(data-marpit-pagination) ' / ' attr(data-marpit-pagination-total);
@@ -231,7 +231,7 @@ style: |
 
   /* ── TITLE SLIDE ── */
   section.title {
-    background: #a3d2e8;
+    background: #77d4ff;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -256,7 +256,7 @@ style: |
     border: 40px solid rgba(255, 255, 255, 0.15);
   }
   section.title h1 {
-    font-family: 'Space Grotesk', sans-serif;
+    font-family: 'Source Serif 4', serif;
     font-size: 3.2em;
     font-weight: 900;
     border: none;
@@ -279,7 +279,7 @@ style: |
   section.title h2::before { content: ''; }
   section.title p {
     color: #ffffff;
-    font-family: 'Space Mono', monospace;
+    font-family: 'Source Code Pro', monospace;
     font-size: 0.70em;
     margin-top: 0;
     border-left: 2px solid #0b5da8;
@@ -302,9 +302,124 @@ style: |
 
 # Agenda
 
+<div class="columns3">
+<div class="box">
+
+## 01
+### Architecture
+How Snowflake is built internally
+
+</div>
+<div class="box">
+
+## 02
+### Workflow
+How data moves through the platform
+
+</div>
+<div class="box">
+
+## 03
+### Characteristics
+Storage, versioning, concurrency
+
+</div>
+</div>
+
+<div class="columns3" style="margin-top: 1.2rem">
+<div class="box">
+
+## 04
+### Vendor Lock-in
+Multi-cloud, but at what cost?
+
+</div>
+<div class="box">
+
+## 05
+### Cost Scenario
+Real numbers for a Swiss SME
+
+</div>
+<div class="box">
+
+## 06
+### Demo + Recommendations
+Live example & when to use it
+
+</div>
+</div>
+
 ---
 
 # Architecture
+
+<div class="columns">
+<div>
+
+## Multi-cluster shared data Architecture 
+
+### Cloud Services
+- Query optimization, metadata, auth
+- Always on, managed by Snowflake
+
+### Compute (Virtual Warehouses)
+- Independent compute clusters
+- Scale up/down, pause when idle
+
+### Storage
+- Compressed columnar micro-partitions (50–500MB) 
+- Decoupled from compute &rarr; pay separately
+<br>
+
+## Hybrid Model
+### Shared-disk + Shared-nothing + MPP
+
+
+</div>
+<div>
+
+<!-- <img src="imgs/architecture.png" width="100%"> -->
+<img src="imgs/archi_multi_cluster.png" width="100%">
+
+> **Key insight:** Scale each side independently &rarr; multiple warehouses can query the same data simultaneously without conflict + no data duplication
+
+</div>
+</div>
+
+---
+
+# Storage
+
+
+<div class="columns">
+<div>
+
+## Data Types
+- **Structured** → CSV, tables, relational data
+- **Semi-structured** → JSON, Avro, Parquet via `VARIANT` type
+- **Unstructured** → files (PDF, images) via staged storage — limited query support
+
+<br>
+
+## Micro-partitions
+- Auto-split into 50–500MB columnar chunks
+- Metadata per partition → partition pruning at query time
+- No manual indexing needed
+
+</div>
+<div>
+
+<img src="imgs/storage.png" width="100%">
+
+> **Critical:** egress costs apply when extracting data out
+
+</div>
+</div>
+
+
+
+
 
 ---
 
@@ -333,3 +448,5 @@ style: |
 ---
 
 # References
+
+- https://www.snowflake.com/en/blog/5-reasons-to-love-snowflakes-architecture-for-your-data-warehouse/
