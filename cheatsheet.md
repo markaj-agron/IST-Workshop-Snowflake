@@ -1,8 +1,11 @@
 # Snowflake Cloud Data Warehouse Cheat Sheet
 
 **Course**: HEIG-VD IST 2025/26
+
 **Topic**: Snowflake Cloud Data Warehouse
-**Authors**: 
+
+**Authors**: Markaj Agron · Jorand Yuuta · Stampfli Nathan · Liao Pei-Wen
+
 **Date**: June 2026
 
 ## Why Snowflake?
