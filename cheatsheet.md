@@ -2,7 +2,7 @@
 
 **Course**: HEIG-VD IST 2025/26
 **Topic**: Snowflake Cloud Data Warehouse
-**Authors**: [Votre groupe]
+**Authors**: 
 **Date**: June 2026
 
 ## Why Snowflake?
@@ -29,6 +29,14 @@ Without a centralized solution, data is scattered across multiple systems and re
 
 Snowflake is a cloud-native data warehouse that centralizes data from multiple sources and enables large-scale analytical processing.
 
+#### Data Storage Characteristics
+
+- Supports structured, semi-structured and unstructured data
+- Native support for JSON, Avro, ORC, Parquet and XML
+- Automatic compression
+- Micro-partitioning for storage and query optimization
+- Separation of Storage and Compute
+
 #### Inputs
 
 - CSV files
@@ -49,68 +57,31 @@ Snowflake is a cloud-native data warehouse that centralizes data from multiple s
 
 ### Benefits
 
-#### Separation of Storage and Compute
-
-Storage and computing resources are managed independently.
-
-Benefits:
-
-- Flexible scaling
-- Better cost control
-- No infrastructure management
-
-### Massively Parallel Processing (MPP)
-
-Snowflake distributes query execution across multiple computing resources.
-
-Benefits:
-
-- Fast analytical queries
-- Efficient processing of large datasets
-- Good support for concurrent users
-
-### Time Travel
-
-Recover data that was accidentally modified or deleted.
-
-Example:
-
-```sql
-UNDROP TABLE SALES;
-```
-
-### Zero-Copy Cloning
-
-Instantly create testing environments without physically copying data.
-
-Example:
-    
-```sql
-CREATE DATABASE TEST_DB
-CLONE PROD_DB;
-```
-
-### Fully Managed Service
-
-No server installation or maintenance required.
+- Separation of Storage and Compute: Storage and compute resources can be scaled independently, improving flexibility and cost management.
+- Broad Data Support: Supports structured, semi-structured and unstructured data, with native support for JSON, Avro, ORC, Parquet and XML.
+- High Scalability: Compute resources are organized into Virtual Warehouses that can scale up (larger warehouses) or scale out (multi-cluster warehouses).
+- Excellent Concurrency: Multiple Virtual Warehouses can access the same data simultaneously with minimal resource contention.
+- Massively Parallel Processing (MPP): Queries are distributed across multiple compute resources, enabling efficient processing of large datasets.
+- Minimal Administration: Fully managed service with no infrastructure maintenance, indexing or vacuuming required.
+- Strong Security: Encryption at rest and in transit, role-based access control (RBAC), MFA and network policies.
+- Time Travel & Fail-safe: Supports recovery of deleted or modified data and provides access to historical versions of data.
+- Fast Analytical Performance: Query optimization, result caching and micro-partitioning improve analytical query performance.
+- Secure Data Sharing: Share live data securely across accounts, organizations and cloud providers without data duplication.
+- Multi-cloud Support: Available on AWS, Microsoft Azure and Google Cloud Platform.
+- Automatic Cost Optimization: Warehouses can automatically suspend when idle and resume on demand.
 
 ### Limitations
 
-#### Vendor lock-in
+- Cost: Can become expensive for large workloads, poorly optimized queries or oversized warehouses.
+- Unpredictable Spending: Consumption-based pricing can make costs difficult to estimate and control.
+- Vendor Lock-in: Migrating data pipelines, security policies and workloads to another platform may require significant effort.
+- Cloud-only Platform: No on-premises deployment option.
+- Limited Infrastructure Control: Less flexibility than self-managed solutions for low-level tuning and customization.
+- Time Travel Storage Costs: Retaining historical data increases storage consumption.
+- Learning Curve: Understanding warehouses, credits, clustering, optimization and cost management requires training.
+- Not Optimized for OLTP: Designed for analytical workloads (OLAP), not high-frequency transactional applications.
+- Dependency on Cloud Providers: Availability depends on Snowflake and the underlying cloud provider infrastructure.
 
-Applications and processes become dependent on Snowflake's ecosystem.
-
-#### Cost management
-
-Poorly optimized queries or oversized warehouses can generate unnecessary costs.
-
-#### Cloud dependency
-
-Requires internet access and depends on the availability of cloud providers.
-
-#### Not designed for OLTP
-
-Snowflake is optimized for analytics (OLAP), not transactional applications.
 
 ## Cost structure
 
@@ -125,8 +96,8 @@ Measured in:
 Example:
 
 ```text
-500 GB ≈ 0.5 TB
-Cost: ~20 CHF/month
+1 TB stored data
+Cost: approximately $23/month
 ```
 ### 2. Compute
 
@@ -146,17 +117,26 @@ Factors:
 
 Assumptions:
 
-- 500 GB stored data
+- 1 TB of stored data
 - 10 business users
-- 2 hours of analytics per day
+- Approximately 10 hours of warehouse usage per week
 - X-Small warehouse
-
+- Snowflake AI features enabled (CoWork and CoCo)
 
 | Component | Estimated Cost |
-| --------- | -------------- |
-| Storage   | ~10 CHF/month  |
-| Compute   | ~160 CHF/month |
-| Total     | ~170 CHF/month |
+|------------|------------:|
+| Compute (Warehouse) | $117.00/month |
+| Snowflake CoWork | $123.08/month |
+| Snowflake CoCo | $5.78/month |
+| Storage (1 TB) | $23.00/month |
+| Total | $268.86/month |
+
+### Cost observations
+
+- Compute is the largest cost component.
+- AI features (CoWork and CoCo) can significantly increase the monthly bill.
+- Storage costs are relatively low compared to compute costs.
+- Automatic warehouse suspension can help reduce compute expenses.
 
 ## How to get started
 
@@ -259,6 +239,9 @@ DROP TABLE CUSTOMER_PROD;
 
 UNDROP TABLE CUSTOMER_PROD;
 ```
+
+- Time Travel: recover historical versions of data
+- Fail-safe: additional recovery period managed by Snowflake
 
 ### Zero-Copy Clone
 ```sql
