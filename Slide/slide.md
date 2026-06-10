@@ -563,6 +563,7 @@ Egress costs apply when extracting data out &rarr; keep compute and storage in s
 
 </div>
 </div>
+
 ---
 
 # Workflow
@@ -617,97 +618,55 @@ Egress costs apply when extracting data out &rarr; keep compute and storage in s
 
 
 ---
-
-# Key Characteristics
-
-<div class="columns">
-
-<div>
-
-## Storage
-
-- Structured, semi-structured and unstructured data
-- JSON, Avro, ORC, Parquet, XML
-- Automatic compression
-- Micro-partitioning
-- Storage / Compute separation
-
-<br>
-
-## Processing
-
-- ANSI SQL
-- ACID transactions
-- Query optimization
-- Result caching
-
-</div>
-
-<div>
-
-## Scalability
-
-- Virtual Warehouses
-- Scale Up (larger warehouse)
-- Scale Out (multi-cluster)
-- Auto Suspend / Resume
-
-<br>
-
-## Advanced Features
-
-- MPP architecture
-- Time Travel
-- Fail-safe
-- Secure Data Sharing
-- Multi-cloud deployment
-
-</div>
-
-</div>
-
----
-
-# Vendor Lock-in
+# Vendor Lock-in: Multi-cloud, But At What Cost?
 
 <div class="columns">
-
 <div>
 
-## Advantages
+## Portable
+- Runs on AWS, Azure, GCP : no vendor dependency
+- Standard ANSI SQL : queries portable 
+- Open ingestion formats — Parquet, JSON, CSV
 
-- Multi-cloud support
-  - AWS
-  - Azure
-  - Google Cloud
 
-- Open formats
-  - Parquet
-  - JSON
-  - CSV
+<style scoped>
+th { background: var(--accent); color: #0d1b2a; }
+table { font-size: 0.72em; width: 95%; }
+td, th { padding: 0.3em 0.6em; }
+</style>
+## Proprietary Features
+| Feature | Lock-in Risk | Mitigation |
+|---------|-------------|------------|
+| Time Travel | no equivalent elsewhere | Use for recovery only |
+| Zero-Copy Clone | proprietary syntax | Document dependencies |
+| Data Sharing | partner Snowflake account | Export via open formats |
+| Snowpipe | proprietary ingestion | Replace with Airbyte or `COPY INTO` |
 
-- SQL-based platform
+</div>
+<div>
+
+## Migration Cost If You Leave
+
+- Rebuild all ingestion pipelines
+- Recreate security policies & role hierarchy
+- Re-implement Time Travel logic elsewhere
+- Export all data — **egress costs apply**
+
+<div class="box-warn">
+
+### Real Risk for SME
+No data engineer :  proprietary features get adopted without governance, migration cost grows silently over time.
 
 </div>
 
-<div>
+<div class="box-info">
 
-## Risks
-
-- Proprietary Snowflake features
-  - Time Travel
-  - Zero-Copy Clone
-  - Data Sharing
-
-- Migration effort
-  - Pipelines
-  - Security policies
-  - User management
-
-- Cloud dependency
+### Mitigation Strategy
+Prefer ANSI SQL + open formats where possible. Use Snowflake-specific features consciously, not by default.
 
 </div>
 
+</div>
 </div>
 
 ---
