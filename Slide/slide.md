@@ -620,6 +620,8 @@ Egress costs apply when extracting data out &rarr; keep compute and storage in s
 ---
 # Vendor Lock-in: Multi-cloud, But At What Cost?
 
+
+
 <div class="columns">
 <div>
 
@@ -670,54 +672,63 @@ Prefer ANSI SQL + open formats where possible. Use Snowflake-specific features c
 </div>
 
 ---
+# Cost Scenario: SwissBike SA
 
-# Cost Scenario
-
-## SwissBike SA
 
 <div class="columns">
-
 <div>
 
-### Assumptions
+<style scoped>
+th { background: var(--accent); color: #0d1b2a; }
+table { font-size: 0.72em; width: 95%; }
+td, th { padding: 0.3em 0.6em; }
+</style>
 
-- 1 TB stored data
-- 10 business users
-- X-Small Warehouse
-- 10 hours of warehouse usage per week
-- Snowflake AI features enabled
+## SwissBike Assumptions
+- 500 GB stored data
+- 1 X-Small Warehouse, Standard edition
+- 10h/week warehouse usage
+- Region: AWS EU Zurich (**Swiss nDSG**)
+- Snowflake CoWork enabled
 
-<br>
+## How Snowflake Charges
 
-### Key Takeaway
+| Layer | Unit | When Charged | EU Zurich |
+|-------|------|-------------|-----------|
+| Cloud Services | Credits | Free under 10% of compute | ~$0 for SME |
+| Compute | Credits/second | Warehouse running only | $3.10/credit |
+| Storage | GB/month | Always, 24/7 | $26.95/TB |
 
-This scenario represents a growing Swiss SME using Snowflake for analytics and AI-assisted workloads.
 
 </div>
 
 <div>
 
+## Calculation
+`10h/week × 4.3 weeks × 1 credit/h × $3.10 = $133/month`
+`0.5 TB × $26.95 = $13.48/month`
+
+
 | Component | Monthly Cost |
 |------------|-------------:|
-| Compute (Warehouse) | $117.00 |
+| Compute (XS Warehouse) | $133.30 |
 | Snowflake CoWork | $123.08 |
-| Snowflake CoCo | $5.78 |
-| Storage | $23.00 |
-| **Total** | **$268.86** |
+| Snowflake Cortex AI | $5.78 |
+| Storage (500 GB, EU Zurich) | $13.48 |
+| **Total** | **$275.64** |
+
 
 <div class="box">
 
 ### Cost Observations
+- CoWork + Cortex AI = **$128/month — 46% of total bill**
+- Storage is cheap, compute dominates
+- Without auto-suspend: 24/7 running (40h/week)= ~$520/month instead of $133/month
 
-- Storage is relatively cheap
-- Compute is the main cost driver
-- AI features significantly increase costs
-- Auto Suspend can reduce spending
-
-</div>
 
 </div>
 
+</div>
 </div>
 
 ---
