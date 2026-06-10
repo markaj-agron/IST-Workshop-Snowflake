@@ -1,0 +1,187 @@
+\documentclass[9pt,a4paper]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[a4paper,margin=1cm]{geometry}
+\usepackage{multicol}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{listings}
+\usepackage{enumitem}
+\usepackage{titlesec}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{2pt}
+
+\titlespacing*{\section}{0pt}{4pt}{2pt}
+\titlespacing*{\subsection}{0pt}{3pt}{1pt}
+\titlespacing*{\subsubsection}{0pt}{2pt}{1pt}
+
+\lstset{
+    basicstyle=\ttfamily\scriptsize,
+    frame=single,
+    breaklines=true
+}
+
+\title{\vspace{-1cm}Snowflake Cloud Data Warehouse Cheat Sheet}
+\author{Markaj Agron \and Jorand Yuuta \and Stampfli Nathan \and Liao Pei-Wen}
+\date{June 2026}
+
+\begin{document}
+
+\maketitle
+\vspace{-1cm}
+
+\section{Why Snowflake?}
+
+\subsection{Real-world Scenario: SwissBike SA}
+
+SwissBike SA is a Swiss SME selling bicycles and accessories online. Data comes from multiple sources: e-commerce platform, ERP system, CRM system and marketing tools.
+
+Management needs answers to questions such as: Which countries generate the most revenue? Who are the most valuable customers? Which products should be promoted? How are sales evolving over time?
+
+Without a centralized solution, data remains scattered across systems, making reporting slow, inconsistent and difficult to maintain.
+
+\subsection{What does Snowflake do?}
+
+Snowflake is a cloud-native data warehouse that centralizes data from multiple sources and enables large-scale analytical processing.
+
+\subsubsection{Data Storage Characteristics}
+
+Supports structured, semi-structured and unstructured data; native support for JSON, Avro, ORC, Parquet and XML; automatic compression; micro-partitioning; separation of Storage and Compute.
+
+\subsubsection{Inputs and Outputs}
+
+\begin{minipage}[t]{0.47\columnwidth}
+\textbf{Inputs}\\
+CSV files, databases, ERP systems, CRM systems, APIs, streaming data.
+\end{minipage}
+\hfill
+\begin{minipage}[t]{0.47\columnwidth}
+\textbf{Outputs}\\
+SQL query results, dashboards (Power BI, Tableau, Looker), reports, machine learning and analytics data.
+\end{minipage}
+
+\section{Benefits and Limitations}
+
+\subsection{Benefits}
+
+Separation of Storage and Compute; broad data support; high scalability; excellent concurrency; massively parallel processing (MPP); minimal administration; strong security; Time Travel \& Fail-safe; fast analytical performance; secure data sharing; multi-cloud support; automatic cost optimization.
+
+\subsection{Limitations}
+
+Cost; unpredictable spending; vendor lock-in; cloud-only platform; limited infrastructure control; Time Travel storage costs; learning curve; not optimized for OLTP workloads; dependency on cloud providers.
+
+\section{Cost Structure}
+
+\subsection{Storage}
+
+Measured in TB stored per month.
+
+\begin{lstlisting}
+1 TB stored data
+Cost: approximately $23/month
+\end{lstlisting}
+
+\subsection{Compute}
+
+Measured in credits consumed by Virtual Warehouses. Cost depends on warehouse size, execution time and number of clusters.
+
+\section{Monthly Cost Example}
+
+\subsection{SwissBike SA}
+
+Assumptions: 1 TB storage, 10 business users, 10 hours warehouse usage/week, X-Small warehouse, Snowflake AI features enabled.
+
+\begin{center}
+\begin{tabular}{lr}
+\toprule
+Component & Cost \\
+\midrule
+Compute & \$117.00 \\
+CoWork & \$123.08 \\
+CoCo & \$5.78 \\
+Storage & \$23.00 \\
+\midrule
+Total & \$268.86 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\textbf{Observations:} Compute is the largest cost component. AI features significantly increase monthly spending. Storage costs remain relatively low. Automatic warehouse suspension helps reduce expenses.
+
+\section{Basic SQL Operations}
+
+Snowflake relies on standard SQL for data definition (DDL), data manipulation (DML) and administration tasks.
+
+\begin{lstlisting}[language=SQL]
+CREATE DATABASE POC_SNOWFLAKE;
+CREATE SCHEMA DEMO;
+
+CREATE WAREHOUSE DEMO_WH
+WITH WAREHOUSE_SIZE='XSMALL';
+
+SELECT CURRENT_ACCOUNT(),
+       CURRENT_USER(),
+       CURRENT_WAREHOUSE();
+
+SELECT *
+FROM SNOWFLAKE_SAMPLE_DATA
+.TPCH_SF1.CUSTOMER
+LIMIT 10;
+\end{lstlisting}
+\section{Common Commands}
+
+\textbf{Query sample data}
+
+\begin{lstlisting}[language=SQL]
+SELECT *
+FROM SNOWFLAKE_SAMPLE_DATA
+.TPCH_SF1.ORDERS
+LIMIT 100;
+\end{lstlisting}
+
+\textbf{Warehouse operations}
+
+\begin{lstlisting}[language=SQL]
+ALTER WAREHOUSE COMPUTE_WH
+SET WAREHOUSE_SIZE='SMALL';
+
+ALTER WAREHOUSE COMPUTE_WH
+SUSPEND;
+
+ALTER WAREHOUSE COMPUTE_WH
+RESUME;
+\end{lstlisting}
+
+\textbf{Time Travel}
+
+\begin{lstlisting}[language=SQL]
+DROP TABLE CUSTOMER_PROD;
+UNDROP TABLE CUSTOMER_PROD;
+\end{lstlisting}
+
+Time Travel recovers historical versions of data; Fail-safe provides an additional recovery period.
+
+\textbf{Zero-Copy Clone}
+
+\begin{lstlisting}[language=SQL]
+CREATE TABLE CUSTOMER_TEST
+CLONE CUSTOMER_PROD;
+\end{lstlisting}
+
+\textbf{Query Profile}
+
+Monitoring $\rightarrow$ Query History $\rightarrow$ Query Profile.
+
+Displays Table Scan, Join, Aggregate and Sort operations, helping understand MPP execution.
+
+\section{When Should a SME Use Snowflake?}
+
+\textbf{Recommended:} Business Intelligence, Data Warehousing, Analytics, Reporting, Data Science, Multi-source Data Integration.
+
+\textbf{Not Recommended:} Small applications with limited data, OLTP workloads, projects requiring full infrastructure control.
+
+\textbf{Recommendation:} Snowflake is an excellent choice for SMEs requiring scalable analytics with minimal operational overhead, provided costs and vendor lock-in risks are actively monitored.
+
+\end{document}

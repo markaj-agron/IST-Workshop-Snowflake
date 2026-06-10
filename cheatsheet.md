@@ -28,7 +28,7 @@ Management needs reliable answers to questions such as:
 
 Without a centralized solution, data is scattered across multiple systems and reports become slow, inconsistent and difficult to maintain.
 
- ### What does Snowflake do?
+### What does Snowflake do?
 
 Snowflake is a cloud-native data warehouse that centralizes data from multiple sources and enables large-scale analytical processing.
 
