@@ -127,14 +127,15 @@ style: |
 
   /* ── TABLES ── */
   table {
-    width: 100%;
+    width: 80%;
+    margin: 0 auto;
+    margin-top: 0.5em;
     font-size: 0.86em;
     border-collapse: collapse;
-    margin-top: 0.5em;
   }
   th {
-    background: var(--text);
-    color: #ffffff;
+    background: var(--accent);
+    color: #040404;
     font-family: 'Source Serif 4', serif;
     font-weight: 700;
     font-size: 0.85em;
@@ -413,7 +414,7 @@ When should a SME use Snowflake?
 
 ---
 
-# Business Scenario
+# Scenario / Challenges
 
 <div class="columns-tight">
 
@@ -423,24 +424,24 @@ When should a SME use Snowflake?
 
 SwissBike SA is a Swiss SME selling bicycles and accessories online:
 
-- **~50** employees, no dedicated data engineer
-- **~1,500 orders/month** across 3 
-- **10** analytics users
-- Collect data across disconnected systems( E-commerce, ERP, CRM and Marketing tools)
+- **~50 employees**, IT handled by generalists
+- **~1,500 orders/month**
+- currently **10 analytics users**
+- Collect data **across disconnected systems**( E-commerce, ERP, CRM and Marketing tools)
 
 
 </div>
 
 <div>
 
-## Business Challenges
+## Challenges
 
-- No dedicated data engineer, IT handled by generalists
-- Data is scattered across multiple systems
-- Analytics rely on manual Excel exports
-- More users need access to analytics
-- Growing data volume with no scalable storage strategy
-- Budget constraints
+- **No dedicated data engineer**
+- Data is scattered across **multiple systems**
+- Analytics rely on **manual Excel** exports
+- **More users** need access to analytics
+- **Growing data volume** with no scalable storage strategy
+- **Budget** constraints
 
 </div>
 
@@ -456,45 +457,34 @@ How can SwissBike **centralize** its data, **scale** analytics and stay within *
 
 ---
 
-# What is Snowflake?
+# What Does Snowflake Solve?
 
-<div class="columns">
+<style scoped>
+th { background: var(--accent); color: #0d1b2a; }
+.table-center { display: flex; justify-content: center; }
+.table-center table { width: 90%; margin-top: 0.5em; }
 
-<div>
+</style>
 
-## Definition
+<div class="table-center">
 
-Snowflake is a **cloud-native Data Warehouse** designed for analytics and data engineering.
-
-It enables organizations to:
-
-- Centralize data from multiple sources
-- Store large volumes of data
-- Run analytical SQL queries
-- Scale compute and storage independently
-
-</div>
-
-<div>
-
-## Key Concepts
-
-- Cloud-native platform
-- Storage & Compute separation
-- Virtual Warehouses
-- Massively Parallel Processing (MPP)
-- Time Travel & Zero-Copy Clone
-- Multi-cloud support
+| SME Pain Point | Snowflake Solution | Covered In |
+|----------------|-------------------|------------|
+| User increase| Independent Virtual Warehouses | Architecture |
+| No data engineer | Fully managed Cloud Services layer | Architecture |
+| Data volume growing, query speed slower | Micro-partitions + pruning skip irrelevant data | Storage |
+| Milti disconnected systems, no single source of truth | Snowpipe centralizes all sources | Workflow + Vendor lockin|
+| Manual CSV exports, reports 1 week stale | Automated ingestion, always up to date | Workflow |
+| Budget sensitive | Pay only when warehouse is running | Cost Scenario |
 
 </div>
 
-</div>
-
+<br>
 <div class="box-info">
 
-### In one sentence
+### Bottom Line
 
-Snowflake helps organizations transform data from multiple systems into actionable business insights.
+Snowflake is not the cheapest option but for a Swiss SME outgrowing Excel, it removes the need for a data engineering team entirely.
 
 </div>
 
