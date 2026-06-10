@@ -733,53 +733,52 @@ td, th { padding: 0.3em 0.6em; }
 
 ---
 
-# Demo
+# Pros & Cons
+
+<style scoped>
+th { background: var(--accent); color: #0d1b2a; }
+table { font-size: 0.76em; }
+</style>
+
+| | Advantage | trade off |
+|---|---|---|
+| **Architecture** | Decoupled compute & storage | Cold start 2–3s |
+| | MPP — concurrent users, no interference | Not for OLTP |
+| **Compute** | Pay per second, zero when suspended | No hard spend cap by default |
+| **Storage** | Columnar compression — 3–5x automatic | $26.95/TB — most expensive in EU |
+| | Pruning — query speed constant as data grows | Egress costs on data extraction |
+| | Time Travel + Fail-safe — 90d + 7d recovery | No free tier — trial only |
+| **Vendor** | Multi-cloud — AWS, Azure, GCP | Proprietary lock-in — Time Travel, Snowpipe |
+| | ANSI SQL — portable | AI features — 46% of bill |
+| | Fully managed — no DBA | nDSG → EU Zurich adds 55% premium |
+| **Other** | Encryption, RBAC, SSO out of the box | SQL only — no low-code option |
+
 
 ---
 
-# Pros & Cons
 
-<div class="columns">
+# Snowflake vs Market Alternatives
 
-<div>
+<style scoped>
+th { background: var(--accent); color: #0d1b2a; }
+table { font-size: 0.76em; }
+</style>
 
-<div class="box-ok">
+| | Snowflake | BigQuery | Redshift | Azure Synapse |
+|---|---|---|---|---|
+| **Owner** | Independent | Google | Amazon | Microsoft |
+| **Setup complexity** | Low | Lowest | Medium | High |
+| **columnar + auto compression** | yes | yes | yes | yes |
+| **Scaling** | Manual config required for verticle scaling | Fully automatic | Manual | Semi-automatic |
+| **Lock-in** | Proprietary features | GCP ecosystem | AWS ecosystem | Microsoft ecosystem |
+| **Pricing** | Credits + storage | Per TB scanned | Per node 24/7 | Per DWU + storage |
+| **Storage/TB (EU)** | $26.95 — most expensive | ~$20 | ~$24 bundled in node | ~$20 |
+| **Free tier** |  $400 trial, first 30 days |  1TB queries + 10GB/month | X | X |
 
-## Pros
 
-- High scalability
-- MPP architecture
-- Excellent concurrency
-- Minimal administration
-- Strong security
-- Time Travel & Fail-safe
-- Zero-Copy Clone
-- Multi-cloud support
+##### All 4 have vendor lock-in.BigQuery is simpler and cheaper for SMEs with no data engineer. Snowflake  wins when **cloud neutrality matters**.
 
-</div>
 
-</div>
-
-<div>
-
-<div class="box-warn">
-
-## Cons
-
-- Consumption-based pricing
-- Cost monitoring required
-- Vendor lock-in
-- Cloud dependency
-- Not optimized for OLTP
-- Learning curve
-
-</div>
-
-</div>
-
-</div>
-
-> Snowflake offers strong analytical capabilities and scalability, but requires active cost management and acceptance of some vendor dependency.
 
 ---
 
@@ -789,16 +788,21 @@ td, th { padding: 0.3em 0.6em; }
 
 <div>
 
-## Recommended For
+## Use Snowflake When
 
 ✓ SMEs needing centralized analytics
 
-✓ Companies expecting significant data growth
+✓ Data volume growing beyond single database capacity
 
 ✓ Organizations with multiple teams accessing data
 
 ✓ Businesses seeking low operational overhead
 
+✓ No dedicated data engineer 
+
+✓ Multiple disconnected systems need centralizing
+
+✓ no existing AWS/Azure/GCP commitment
 </div>
 
 <div>
@@ -811,24 +815,38 @@ td, th { padding: 0.3em 0.6em; }
 
 ✗ Businesses with very limited cloud adoption
 
-</div>
+✗ Already on AWS/ Google → Redshift / BigQuery
+
+✗ Budget too small — BigQuery free tier covers basic SME needs
+
+✗ Need real-time or transactional workloads (OLTP)
+
+✗ No SQL knowledge 
 
 </div>
 
-<div class="box-info" style="margin-top:1rem;">
+</div>
+
+<div class="box-info" style="margin-top:0rem;">
 
 ### Final Assessment
 
-Snowflake is an excellent analytical platform for growing SMEs.
-
-Its strongest advantages are scalability, MPP processing, concurrency and operational simplicity.
-
-However, organizations should carefully monitor costs and consider the long-term impact of vendor lock-in.
+**Choose Snowflake when:** cloud-agnostic, multi-source data, growing volume, no cloud vendor preference.
+**Otherwise:** BigQuery (GCP), Redshift (AWS), Synapse (Azure) are cheaper native alternatives.
 
 </div>
 
 ---
 
+# Demo
+
+---
+
+
+
+
 # References
 
 - https://www.snowflake.com/en/blog/5-reasons-to-love-snowflakes-architecture-for-your-data-warehouse/
+
+- https://medium.com/@mastech_digital/snowflake-vs-redshift-vs-bigquery-vs-synapse-a-comprehensive-comparison-dbf36d0f911
