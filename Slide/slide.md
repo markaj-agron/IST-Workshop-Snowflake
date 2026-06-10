@@ -470,11 +470,11 @@ th { background: var(--accent); color: #0d1b2a; }
 
 | SME Pain Point | Snowflake Solution | Covered In |
 |----------------|-------------------|------------|
-| User increase| Independent Virtual Warehouses | Architecture |
-| No data engineer | Fully managed Cloud Services layer | Architecture |
-| Data volume growing, query speed slower | Micro-partitions + pruning skip irrelevant data | Storage |
+| User increase | Add Virtual Warehouses without touching storage | Architecture |
+| No data engineer | No infra to maintai, Cloud Services layer fully managed by Snowflake| Architecture |
+| Data volume growing, query speed slower | Storage layer scales independently + Micro-partitions + pruning skip irrelevant data | Architecture + Storage |
 | Milti disconnected systems, no single source of truth | Snowpipe centralizes all sources | Workflow + Vendor lockin|
-| Manual CSV exports, reports 1 week stale | Automated ingestion, always up to date | Workflow |
+| Manual CSV exports, reports 1 week stale | Automated ingestion, always up to date | Workflow + + Vendor lockin|
 | Budget sensitive | Pay only when warehouse is running | Cost Scenario |
 
 </div>
