@@ -314,7 +314,6 @@ style: |
 <p>HEIG-VD IST 2025/26<br>Markaj Agron · Jorand Yuuta · Stampfli Nathan · Liao Pei-Wen<br>12.06.2026, 16:30 - 16:42</p>
 
 ---
-
 # Agenda
 
 <div class="columns4">
@@ -322,7 +321,7 @@ style: |
 <div class="box">
 
 ## 01
-### Business Scenario
+### Scenario
 SwissBike SA challenges
 
 </div>
@@ -330,8 +329,8 @@ SwissBike SA challenges
 <div class="box">
 
 ## 02
-### What is Snowflake?
-A quick introduction
+### Why Snowflake?
+SME pain points solved
 
 </div>
 
@@ -339,15 +338,15 @@ A quick introduction
 
 ## 03
 ### Architecture
-How Snowflake is built
+Independent scaling & query performance
 
 </div>
 
 <div class="box">
 
 ## 04
-### Workflow
-How data moves through the platform
+### Storage
+Columnar, partitioned & protected
 
 </div>
 
@@ -358,8 +357,8 @@ How data moves through the platform
 <div class="box">
 
 ## 05
-### Characteristics
-Storage, scalability & recovery
+### Workflow
+Data flow end to end
 
 </div>
 
@@ -382,8 +381,8 @@ Real numbers for a Swiss SME
 <div class="box">
 
 ## 08
-### Demo
-SwissBike SA use case
+### Pros & Cons
+Strengths & trade-offs
 
 </div>
 
@@ -394,8 +393,8 @@ SwissBike SA use case
 <div class="box">
 
 ## 09
-### Pros & Cons
-Strengths and limitations
+### Market Alternatives
+Snowflake vs BigQuery, Redshift, Synapse
 
 </div>
 
@@ -407,11 +406,25 @@ When should a SME use Snowflake?
 
 </div>
 
-<div></div>
-<div></div>
+<div class="box">
+
+## 11
+### Demo
+SwissBike SA use case
 
 </div>
 
+<div class="box">
+
+## 12
+### Reference
+Further studies
+
+</div>
+
+<div></div>
+
+</div>
 ---
 
 # Scenario / Challenges
@@ -850,3 +863,7 @@ table { font-size: 0.76em; }
 - https://www.snowflake.com/en/blog/5-reasons-to-love-snowflakes-architecture-for-your-data-warehouse/
 
 - https://medium.com/@mastech_digital/snowflake-vs-redshift-vs-bigquery-vs-synapse-a-comprehensive-comparison-dbf36d0f911
+
+- https://www.snowflake.com/en/pricing-options/
+
+- https://www.snowflake.com/legal-files/CreditConsumptionTable.pdf
