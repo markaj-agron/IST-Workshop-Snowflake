@@ -496,18 +496,18 @@ Snowflake is not the cheapest option but for a Swiss SME outgrowing Excel, it **
 <div class="columns">
 <div>
 
-## Hybrid Model = Shared-disk + Shared-nothing + MPP
+###  Hybrid Model = Shared-disk + Shared-nothing + MPP
 
-### Cloud Services
+## Cloud Services
 - Always on, managed by Snowflake (Query opt, metadata, auth)
 - **Free** under 10% of daily compute usage
 
-### Compute (Virtual Warehouses)
+## Compute (Virtual Warehouses)
 - 24h query result **cache** &rarr; free repeated queries 
 - **Auto scale** up/down, pause when idle
 - Trade off : Cold start 2-3s
 
-### Storage
+## Storage
 - Decoupled from compute &rarr; pay separately
 - Trade off : **Egress costs** when different regions
 <br>
@@ -517,44 +517,52 @@ Snowflake is not the cheapest option but for a Swiss SME outgrowing Excel, it **
 <div>
 
 <!-- <img src="imgs/architecture.png" width="100%"> -->
-<img src="imgs/archi_multi_cluster.png" width="100%">
+<img src="imgs/archi_multi_cluster.png" width="90%">
 
-> **Key insight:* query without conflict, no duplication
+### Key insight:
+Scale independently + Query without conflict, no duplication
 
-> **Trade off:* layer separation adds overhead for small frequent transactions (`INSERT`, `UPDATE` slower than PostgreSQL)
+### Trade off:
+Layer separation adds overhead for small frequent transactions (`INSERT`, `UPDATE` slower than PostgreSQL)
 </div>
 </div>
 
 ---
-
-# Storage
-
+# Storage: Columnar, Partitioned & Protected
 
 <div class="columns">
 <div>
 
 ## Data Types
-- **Structured** → CSV, tables, relational data
-- **Semi-structured** → JSON, Avro, Parquet via `VARIANT` type
-- **Unstructured** → files (PDF, images) via staged storage — limited query support
-
-<br>
+- **Structured** + **Semi-structured** 
+- **Unstructured** → PDF, images via staged storage — limited query support
 
 ## Micro-partitions
-- Auto-split into 50–500MB columnar chunks
-- Metadata per partition → partition pruning at query time
-- No manual indexing needed
+- Auto-split into **columnar chunks** (50–500MB)
+- Metadata per partition &rarr; **pruning skips irrelevant data at query time**
+- **Clustering keys** — optional, co-locates frequent query columns for large tables
+
+## Data Protection
+- **Time Travel** — query or restore data up to 90 days
+- **Fail-safe** — 7-day recovery after Time Travel expires, managed by Snowflake
 
 </div>
 <div>
 
-<img src="imgs/storage.png" width="100%">
+<img src="imgs/storage.png" width="80%">
 
-> **Critical:** egress costs apply when extracting data out
+
+### Key Advantage
+- Mainain query speed as data grow &rarr; prune+cluster 
+- Storage cost stays low &rarr; columnar compression
+
+
+### Trade-off
+Egress costs apply when extracting data out &rarr; keep compute and storage in same region
+
 
 </div>
 </div>
-
 ---
 
 # Workflow
