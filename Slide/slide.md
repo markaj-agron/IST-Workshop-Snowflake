@@ -47,7 +47,7 @@ style: |
     margin-top: 0;
     margin-bottom: 0.6em;
     letter-spacing: -0.03em;
-    text-transform: uppercase;
+    
   }
 
   h2 {
@@ -471,7 +471,7 @@ th { background: var(--accent); color: #0d1b2a; }
 | SME Pain Point | Snowflake Solution | Covered In |
 |----------------|-------------------|------------|
 | User increase | Add Virtual Warehouses without touching storage | Architecture |
-| No data engineer | No infra to maintai, Cloud Services layer fully managed by Snowflake| Architecture |
+| No data engineer | No infra to maintain| Architecture |
 | Data volume growing, query speed slower | Storage layer scales independently + Micro-partitions + pruning skip irrelevant data | Architecture + Storage |
 | Milti disconnected systems, no single source of truth | Snowpipe centralizes all sources | Workflow + Vendor lockin|
 | Manual CSV exports, reports 1 week stale | Automated ingestion, always up to date | Workflow + + Vendor lockin|
@@ -480,38 +480,37 @@ th { background: var(--accent); color: #0d1b2a; }
 </div>
 
 <br>
+
 <div class="box-info">
 
 ### Bottom Line
 
-Snowflake is not the cheapest option but for a Swiss SME outgrowing Excel, it removes the need for a data engineering team entirely.
+Snowflake is not the cheapest option but for a Swiss SME outgrowing Excel, it **removes the need for a data engineering team entirely**.
 
 </div>
 
 ---
 
-# Architecture
+# Architecture : Independent Scaling & Query Performance
 
 <div class="columns">
 <div>
 
-## Multi-cluster shared data Architecture 
+## Hybrid Model = Shared-disk + Shared-nothing + MPP
 
 ### Cloud Services
-- Query optimization, metadata, auth
-- Always on, managed by Snowflake
+- Always on, managed by Snowflake (Query opt, metadata, auth)
+- **Free** under 10% of daily compute usage
 
 ### Compute (Virtual Warehouses)
-- Independent compute clusters
-- Scale up/down, pause when idle
+- 24h query result **cache** &rarr; free repeated queries 
+- **Auto scale** up/down, pause when idle
+- Trade off : Cold start 2-3s
 
 ### Storage
-- Compressed columnar micro-partitions (50–500MB) 
 - Decoupled from compute &rarr; pay separately
+- Trade off : **Egress costs** when different regions
 <br>
-
-## Hybrid Model
-### Shared-disk + Shared-nothing + MPP
 
 
 </div>
@@ -520,8 +519,9 @@ Snowflake is not the cheapest option but for a Swiss SME outgrowing Excel, it re
 <!-- <img src="imgs/architecture.png" width="100%"> -->
 <img src="imgs/archi_multi_cluster.png" width="100%">
 
-> **Key insight:** Scale each side independently &rarr; multiple warehouses can query the same data simultaneously without conflict + no data duplication
+> **Key insight:* query without conflict, no duplication
 
+> **Trade off:* layer separation adds overhead for small frequent transactions (`INSERT`, `UPDATE` slower than PostgreSQL)
 </div>
 </div>
 
