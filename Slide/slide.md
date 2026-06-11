@@ -450,12 +450,13 @@ SwissBike SA is a Swiss SME selling bicycles and accessories online:
 
 ## Challenges
 
-- **No dedicated data engineer**
+
 - Data is scattered across **multiple systems**
 - Analytics rely on **manual Excel** exports
 - **More users** need access to analytics
 - **Growing data volume** with no scalable storage strategy
 - **Budget** constraints
+- **Query performance** degrades as data grows
 
 </div>
 
@@ -485,10 +486,9 @@ th { background: var(--accent); color: #0d1b2a; }
 | SME Pain Point | Snowflake Solution | Covered In |
 |----------------|-------------------|------------|
 | User increase | Add Virtual Warehouses without touching storage | Architecture |
-| No data engineer | No infra to maintain| Architecture |
 | Data volume growing, query speed slower | Storage layer scales independently + Micro-partitions + pruning skip irrelevant data | Architecture + Storage |
-| Milti disconnected systems, no single source of truth | Snowpipe centralizes all sources | Workflow + Vendor lockin|
-| Manual CSV exports, reports 1 week stale | Automated ingestion, always up to date | Workflow + + Vendor lockin|
+| Multiple disconnected systems, no single source of truth | Snowpipe centralizes all sources | Workflow + Vendor lockin|
+| Manual CSV exports, reports stale | Automated ingestion, always up to date | Workflow + Vendor lockin|
 | Budget sensitive | Pay only when warehouse is running | Cost Scenario |
 
 </div>
@@ -499,7 +499,8 @@ th { background: var(--accent); color: #0d1b2a; }
 
 ### Bottom Line
 
-Snowflake is not the cheapest option but for a Swiss SME outgrowing Excel, it **removes the need for a data engineering team entirely**.
+As data engineers, Snowflake removes cluster management overhead and let the team **focus on data products, not infrastructure**.
+
 
 </div>
 
@@ -671,7 +672,8 @@ td, th { padding: 0.3em 0.6em; }
 <div class="box-warn">
 
 ### Real Risk for SME
-No data engineer :  proprietary features get adopted without governance, migration cost grows silently over time.
+**Proprietary features** (Time Travel, Snowpipe, Zero-Copy Clone) are easy to adopt but create silent dependencies that make migration costly if leaving snowflake.
+
 
 </div>
 
@@ -764,7 +766,6 @@ table { font-size: 0.76em; }
 | | Time Travel + Fail-safe — 90d + 7d recovery | No free tier — trial only |
 | **Vendor** | Multi-cloud — AWS, Azure, GCP | Proprietary lock-in — Time Travel, Snowpipe |
 | | ANSI SQL — portable | AI features — 46% of bill |
-| | Fully managed — no DBA | nDSG → EU Zurich adds 55% premium |
 | **Other** | Encryption, RBAC, SSO out of the box | SQL only — no low-code option |
 
 
@@ -790,7 +791,7 @@ table { font-size: 0.76em; }
 | **Free tier** |  $400 trial, first 30 days |  1TB queries + 10GB/month | X | X |
 
 
-##### All 4 have vendor lock-in.BigQuery is simpler and cheaper for SMEs with no data engineer. Snowflake  wins when **cloud neutrality matters**.
+##### All 4 have vendor lock-in. BigQuery is simpler and cheaper for smaller workloads. Snowflake wins when **cloud neutrality and multi-source integration matter**.
 
 
 
@@ -811,8 +812,6 @@ table { font-size: 0.76em; }
 ✓ Organizations with multiple teams accessing data
 
 ✓ Businesses seeking low operational overhead
-
-✓ No dedicated data engineer 
 
 ✓ Multiple disconnected systems need centralizing
 
