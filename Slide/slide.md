@@ -690,7 +690,6 @@ Prefer ANSI SQL + open formats where possible. Use Snowflake-specific features c
 ---
 # Cost Scenario: SwissBike SA
 
-
 <div class="columns">
 <div>
 
@@ -700,47 +699,45 @@ table { font-size: 0.72em; width: 95%; }
 td, th { padding: 0.3em 0.6em; }
 </style>
 
-## SwissBike Assumptions
-- 500 GB stored data
-- 1 X-Small Warehouse, Standard edition
-- 10h/week warehouse usage
-- Region: AWS EU Zurich (**Swiss nDSG**)
-- Snowflake CoWork enabled
+## Assumptions
+- AWS US East (N. Virginia), Standard edition
+- X-Small **Gen 2** warehouse —> 1.35 credits/h
+- 10h/week —> 43.33h/month
+`10h/week * (52 weeks ÷ 12 months)= 43.33h/month`
+- 1 TB storage + CoWork + Cortex AI enabled
 
 ## How Snowflake Charges
 
-| Layer | Unit | When Charged | EU Zurich |
-|-------|------|-------------|-----------|
-| Cloud Services | Credits | Free under 10% of compute | ~$0 for SME |
-| Compute | Credits/second | Warehouse running only | $3.10/credit |
-| Storage | GB/month | Always, 24/7 | $26.95/TB |
+| Layer | Rate | Charged When |
+|-------|------|-------------|
+| Compute | $2.00/credit | Warehouse running only |
+| Storage | $23.00/TB | Always, 24/7 |
+| Cloud Services | free | < 10% of compute |
 
+## Formula
+`43.33h × 1.35 cr/h × $2.00/cr = $117.00/month`
 
 </div>
-
 <div>
 
-## Calculation
-`10h/week × 4.3 weeks × 1 credit/h × $3.10 = $133/month`
-`0.5 TB × $26.95 = $13.48/month`
+## Monthly Bill
 
-
-| Component | Monthly Cost |
-|------------|-------------:|
-| Compute (XS Warehouse) | $133.30 |
+| Component | Cost |
+|-----------|-----:|
+| Compute (XS Gen 2) | $117.00 |
 | Snowflake CoWork | $123.08 |
 | Snowflake Cortex AI | $5.78 |
-| Storage (500 GB, EU Zurich) | $13.48 |
-| **Total** | **$275.64** |
+| Storage (1 TB) | $23.00 |
+| **Total** | **$268.86** |
 
+<div class="box-warn">
 
-<div class="box">
-
-### Cost Observations
-- CoWork + Cortex AI = **$128/month — 46% of total bill**
-- Storage is cheap, compute dominates
-- Without auto-suspend: 24/7 running (40h/week)= ~$520/month instead of $133/month
-
+### Key cost controls
+- **AI features** - CoWork + Cortex AI cost **$128.86/month** more than compute itself. Enable consciously.
+- **Auto-suspend** : without it, ~$194/month compute vs $117
+- **60s minimum** : avoid frequent short sessions
+- **Storage billed on compressed size** — auto columnar compression saves cost
+- **Ingress free but egress charged** cross-region ($20/TB v.s.$90/TB)
 
 </div>
 
@@ -867,3 +864,5 @@ table { font-size: 0.76em; }
 - https://www.snowflake.com/en/pricing-options/
 
 - https://www.snowflake.com/legal-files/CreditConsumptionTable.pdf
+
+- https://docs.snowflake.com/en/guides-overview-cost
