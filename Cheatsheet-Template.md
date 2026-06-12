@@ -1,8 +1,10 @@
-# StratoSphereCloud (SSC) cheat sheet
+# Snowflake Cheat Sheet
 
-Course: HEIG-VD IST 2025/26  
-Authors: Claude Nicollier, Bertrand Piccard  
-Date: June 12, 2026
+**Course:** HEIG-VD IST 2025/26
+**Authors:** Markaj Agron · Jorand Yuuta · Stampfli Nathan · Liao Pei-Wen
+**Date:** June 12, 2026
+
+---
 
 ## Why SSC?
 
