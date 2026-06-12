@@ -466,7 +466,7 @@ SwissBike SA is a Swiss SME selling bicycles and accessories online:
 
 ### Key Question
 
-As the data engineering team, which cloud data warehouse should we adopt to **centralize** data, **scale** analytics and stay within **budget**?
+As the data engineering team, will Snowflake help us **centralize** data and **scale** analytics while staying **within budget**?
 
 </div>
 
@@ -515,10 +515,11 @@ As data engineers, Snowflake removes cluster management overhead and let the tea
 
 ## Cloud Services
 - Always on, managed by Snowflake (Query opt, metadata, auth)
+- 24h query result **cache** &rarr; free repeated queries 
 - **Free** under 10% of daily compute usage
 
 ## Compute (Virtual Warehouses)
-- 24h query result **cache** &rarr; free repeated queries 
+- Local disk cache
 - **Auto scale** up/down, pause when idle
 - Trade off : Cold start 2-3s
 
@@ -866,3 +867,23 @@ table { font-size: 0.76em; }
 - https://www.snowflake.com/legal-files/CreditConsumptionTable.pdf
 
 - https://docs.snowflake.com/en/guides-overview-cost
+
+---
+
+#Below diagrams are only used for Q&A if neeeded
+
+---
+
+# Data Zone
+
+![](./imgs/data_zone.png)
+
+---
+
+# Data Pipeline
+![](./imgs/data_pipeline.png)
+
+--- 
+
+# Data sharing
+![](./imgs/data_sharing.png)
