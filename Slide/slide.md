@@ -438,7 +438,7 @@ Further studies
 
 SwissBike SA is a Swiss SME selling bicycles and accessories online:
 
-- **~50 employees**, IT handled by generalists
+- **~50 employees**, has a small engineering team
 - **~1,500 orders/month**
 - currently **10 analytics users**
 - Collect data **across disconnected systems**( E-commerce, ERP, CRM and Marketing tools)
@@ -466,7 +466,7 @@ SwissBike SA is a Swiss SME selling bicycles and accessories online:
 
 ### Key Question
 
-How can SwissBike **centralize** its data, **scale** analytics and stay within **budget** **without a dedicated data team** ? 
+As the data engineering team, which cloud data warehouse should we adopt to **centralize** data, **scale** analytics and stay within **budget**?
 
 </div>
 
